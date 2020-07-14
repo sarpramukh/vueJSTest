@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue Test</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<!-- production version, optimized for size and speed -->
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>	
+
+</head>
+<body>
+
+	<div class="container">
+		<button class="btn btn-success mb-2 mt-2" @click="addProjectForm">New Project</button>
+
+		<div class="card mb-2" v-for="(project, index) in projects">
+			<div class="card-body">
+				<span class="float-right" style="cursor: pointer;" @click="deleteProjectForm(index)">
+					x
+				</span>
+
+				<h4 class="card-title">Add Project (index: {{index}} )</h4>
+
+				<div class="project-form">
+					<input type="text" class="form-control mb-2" placeholder="Name" v-model="project.name">
+					<textarea class="form-control mb-2" rows="5" placeholder="Description" v-model="project.description"></textarea>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '.container',
+			data: {
+				projects : [
+					{
+						name : '',
+						description : ''
+					}
+				]
+				
+			},
+			methods:{
+				addProjectForm(){
+					this.projects.push({
+						name:'',
+						description:''
+					})
+				},
+				deleteProjectForm(index){
+					this.projects.splice(index,1)
+				}
+			}
+		})
+	</script>
+
+</body>
+</html>
